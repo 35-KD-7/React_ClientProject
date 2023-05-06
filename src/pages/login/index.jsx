@@ -1,18 +1,38 @@
 import React, { useState } from "react";
-import login from "./images/xidian_logo3.png";
+import { useNavigate, Navigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
+
+import login from "./images/xidian_logo3.png";
+import { reqLogin } from "../../api";
+import memoryUtils from "../../utils/memoryUtils";
+import { saveUser } from "../../utils/storageUtils";
+
 import "./login.css";
 
 export default function Login() {
-  function onFinish(value) {
-    // event.preventDefault();
-    console.log("发送Ajax请求----" + value);
+  const [messageApi, contextHolder] = message.useMessage();
+  const nagative = useNavigate();
+  async function onFinish(value) {
+    const { username, password } = value;
+    const response = await reqLogin(username, password);
+    if (typeof response === "string") {
+      messageApi.error(response);
+    } else {
+      // 这还还需对进行用户名和密码的校对
+      if (response.status === 0) {
+        // 跳转页面
+        nagative("admin", { replace: true });
+        memoryUtils.user = response.data;
+        saveUser(response.data);
+      } else {
+        messageApi.error("用户名或密码错误");
+      }
+    }
   }
 
-  function onFinishFailed({ values, errorFields, outOfDate }) {
-    console.log("校验错误");
-    console.log(values, errorFields, outOfDate);
+  function onFinishFailed() {
+    messageApi.error("请按正确格式输入用户名和密码");
   }
   function validator(_, value) {
     if (!value) {
@@ -27,15 +47,12 @@ export default function Login() {
       return Promise.resolve();
     }
   }
-  // 将用户输入存入 state
+  // 将用户输入存入 state，并且是同步是
   const [fields, setFields] = useState({});
-  function handleUsername() {
-    console.log(fields[0].value);
-  }
-  function handlePassword() {
-    console.log(fields[1].value);
-  }
-  return (
+
+  return memoryUtils.user && memoryUtils.user._id ? (
+    <Navigate to="admin" replace />
+  ) : (
     <div className="login">
       <header className="login_header">
         {/* 注意 react 不支持直接写图片的相对地址 */}
@@ -66,14 +83,17 @@ export default function Login() {
             name="username"
             rules={[
               {
-                validator: validator,
+                required: true,
+                message: "用户名不能为空",
+              },
+              {
+                type: "string",
+                min: 2,
+                message: "用户名长度不能小于两位",
               },
             ]}
           >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              onBlur={handleUsername}
-            />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} />
           </Form.Item>
           {/* 密码框 */}
           <Form.Item
@@ -88,9 +108,9 @@ export default function Login() {
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="密码"
-              onBlur={handlePassword}
             />
           </Form.Item>
+          {contextHolder}
           {/* 提交按钮 */}
           <Form.Item>
             <Button

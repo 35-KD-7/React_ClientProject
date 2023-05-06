@@ -1,19 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ConfigProvider } from "antd";
+import { BrowserRouter } from "react-router-dom";
 
-import "antd/dist/reset.css";
 import App from "./App";
+import { getUser } from "./utils/storageUtils";
+import memoryUtils from "./utils/memoryUtils";
 
+// 将 localStorage 里面的用户信息保存到 内存 里面
+memoryUtils.user = getUser();
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
-  <ConfigProvider
-    theme={{
-      token: {
-        colorPrimary: "#19528f",
-      },
-    }}
-  >
+  <BrowserRouter>
     <App />
-  </ConfigProvider>
+  </BrowserRouter>
 );

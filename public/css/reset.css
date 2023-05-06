@@ -76,6 +76,24 @@ td,
 th {
   padding: 0;
 }
+a {
+  text-decoration: none; /* 去除默认的下划线 */
+  color: #000; /* 去除默认的颜色和点击后变化的颜色 */
+}
+
+a {
+  text-decoration: none; /* 去除默认的下划线 */
+  color: #000; /* 去除默认的颜色和点击后变化的颜色 */
+}
+
+a:hover,
+a:link,
+a:visited,
+a:active,
+a:focus {
+  text-decoration: none;
+  color: #000;
+}
 
 #root {
   width: 100%;

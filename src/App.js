@@ -1,17 +1,22 @@
-import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { useRoutes } from "react-router-dom";
+import routes from "./config/routes";
+import { ConfigProvider } from "antd";
+import "antd/dist/reset.css";
 
-import Login from "./pages/login";
-import Admin from "./pages/admin";
-export default class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    );
-  }
+export default function App() {
+  // 路由表 + useRoutes
+  const route = useRoutes(routes);
+
+  return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#19528f",
+        },
+      }}
+    >
+      {route}
+    </ConfigProvider>
+  );
 }

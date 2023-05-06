@@ -1,0 +1,14 @@
+.operation a {
+  margin-right: 20px;
+  color: #3652ff;
+}
+
+.ant-modal-body {
+  border-top: solid 2px #3652ff;
+  padding-top: 20px;
+}
+
+.ant-card {
+  border-radius: none !important;
+  border: none !important;
+}
