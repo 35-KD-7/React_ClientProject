@@ -1,0 +1,46 @@
+.login {
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/picture1.jpg");
+  background-size: 100% 100%;
+}
+
+.login_header {
+  height: 80px;
+  background-color: rgba(0, 63, 130, 0.8);
+}
+
+.login_header .wrapper {
+  width: 530px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.login_header h1 {
+  margin-left: 16px;
+  font-family: "Microsoft Yahei";
+  font-size: 30px;
+  color: #fff;
+  /* line-height: 80px; */
+}
+
+.login_content {
+  width: 400px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 20px 40px;
+  margin: 100px auto;
+}
+
+.login_content h2 {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.login_content .login-form-button {
+  width: 100%;
+}

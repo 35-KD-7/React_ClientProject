@@ -1,0 +1,43 @@
+.left-nav {
+  height: 100%;
+  border-top-right-radius: 16px;
+  background-color: #4f68ff;
+  color: #fff;
+}
+.left-nav-header {
+  text-align: center;
+  padding-top: 10px;
+}
+.left-nav-header img {
+  width: 170px;
+}
+
+.left-nav-header h1 {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.ant-menu-submenu-active .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.88) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.ant-menu-submenu-open ul {
+  background-color: #3652ff !important;
+  color: inherit;
+}
+
+.ant-menu-submenu-selected .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.ant-menu-item-active {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  color: inherit !important;
+}
+.ant-menu-item-selected {
+  background-color: #c2cacf !important;
+  color: black !important;
+}

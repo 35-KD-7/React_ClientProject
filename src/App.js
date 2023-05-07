@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useRoutes } from "react-router-dom";
+import routes from "./config/routes";
+import { ConfigProvider } from "antd";
+import "antd/dist/reset.css";
 
-function App() {
+export default function App() {
+  // 路由表 + useRoutes
+  const route = useRoutes(routes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#19528f",
+        },
+      }}
+    >
+      {route}
+    </ConfigProvider>
   );
 }
-
-export default App;
